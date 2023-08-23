@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,8 @@ Route::resources([
 
 Route::resources([
     'guests' => GuestController::class
+]);
+
+Route::resources([
+    'discounts' => DiscountController::class
 ]);
