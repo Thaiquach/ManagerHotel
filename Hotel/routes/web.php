@@ -3,6 +3,8 @@
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RoomController;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +32,7 @@ Route::resources([
 
 Route::resources([
     'discounts' => DiscountController::class
+]);
+Route::resources([
+    'rooms' => RoomController::class
 ]);
