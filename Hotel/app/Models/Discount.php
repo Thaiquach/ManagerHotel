@@ -14,8 +14,8 @@ class Discount extends Model
     // {
     //     return $this->belongsToMany(Room::class);
     // }
-    // public function book()
-    // {
-    //     return $this->hasMany(Booking::class);
-    // }
+    public function room()
+    {
+        return $this->belongsToMany(Room::class);
+    }
 }

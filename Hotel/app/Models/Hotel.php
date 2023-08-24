@@ -10,12 +10,8 @@ class Hotel extends Model
     use HasFactory;
     protected $table = 'hotels'; // this is the table name
     protected $fillable = ['name', 'address', 'phone']; // these are the fields that can be filled
-    // public function room()
-    // {
-    //     return $this->belongsToMany(Room::class);
-    // }
-    // public function book()
-    // {
-    //     return $this->hasMany(Booking::class);
-    // }
+    public function rooms()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

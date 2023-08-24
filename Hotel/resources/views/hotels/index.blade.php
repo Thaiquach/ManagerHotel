@@ -25,6 +25,6 @@
     @endforeach
 </table>
 <input type="button" value="Create" onclick="location='/hotels/create'" />
-<a href="/customers" class="btn btn-success">Customer</a>
-<a href="/books" class="btn btn-success">Book</a>
 <a href="/rooms" class="btn btn-success">Room</a>
+<a href="/guests" class="btn btn-success">Guests</a>
+<a href="/discounts" class="btn btn-success">Discount</a>

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
+use App\Models\Guest;
+use App\Models\Hotel;
+use App\Models\Room;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -11,7 +17,11 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        
+        
+            $rooms = Rooms::all();
+            return view('rooms.index', ['rooms' => $rooms]);
+        
     }
 
     /**
@@ -19,7 +29,10 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $hotels = Hotel::all();
+        $guests = Guest::all();
+        $discounts = Discount::all();
+        return view('rooms.create', compact('hotels', 'guests', 'discounts'));
     }
 
     /**
@@ -27,7 +40,16 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $room = new Rooms();
+        $room->hotel_id = $request->hotel_id;
+        $room->guest_id = $request->guest_id;
+        $room->number = $request->number;
+        $room->number = $request->number;
+        $room->types = $request->types;
+        $room->price = $request->price;
+        $room->save();
+        $room->discounts()->attach($request->discounts);
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -35,7 +57,8 @@ class RoomController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $rooms = Rooms::find($id);
+        return view('rooms.show', compact('rooms'));
     }
 
     /**
@@ -43,7 +66,11 @@ class RoomController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $rooms = Rooms::find($id);
+        $hotels = Hotel::all();
+        $guests = Guest::all();
+        $discounts = Discount::all();
+        return view('rooms.edit', compact('rooms'), compact('hotels', 'guests', 'discounts'));
     }
 
     /**
@@ -51,7 +78,15 @@ class RoomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $room = Rooms::find($id);
+        $room->hotel_id = $request->hotel_id;
+        $room->guest_id = $request->guest_id;
+        $room->discounts()->sync($request->discounts);
+        $room->number = $request->number;
+        $room->types = $request->types;
+        $room->price = $request->price;
+        $room->save();
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -59,6 +94,8 @@ class RoomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $room = Rooms::find($id);
+        $room->delete();
+        return redirect('/rooms');
     }
 }

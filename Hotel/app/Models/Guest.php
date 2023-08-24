@@ -10,8 +10,8 @@ class Guest extends Model
     use HasFactory;
     protected $table = 'guests';
     protected $fillable = ['name', 'email', 'phonenumber'];
-    // public function book()
-    // {
-    //     return $this->hasMany(Booking::class);
-    // }
+    public function rooms()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }
